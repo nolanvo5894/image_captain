@@ -8,14 +8,14 @@ load_dotenv()
 
 # Set page config
 st.set_page_config(
-    page_title="Image Description App",
+    page_title="Image Captain",
     page_icon="🖼️",
     layout="centered"
 )
 
 # Title
-st.title("Image Description App")
-st.write("Upload an image and get a description using GPT-4o-mini")
+st.title("Image Captain")
+st.write("Upload an image and get a description using AI")
 
 # Create the image description function
 @ell.simple(model="gpt-4o-mini")
