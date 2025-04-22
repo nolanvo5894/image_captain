@@ -25,6 +25,14 @@ def describe_image(img: Image.Image):
         ell.user(["What's in this image?", img])
     ]
 
+# Create the keyword generation function
+@ell.simple(model="gpt-4o-mini")
+def generate_keywords(description: str):
+    return [
+        ell.system("You are a helpful assistant that generates relevant keywords/tags from image descriptions. Generate 5-8 concise keywords."),
+        ell.user(f"Generate a set of keywords for an image with this description: {description}")
+    ]
+
 # File uploader
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
@@ -40,9 +48,14 @@ if uploaded_file is not None:
                 # Get the description
                 description = describe_image(image)
                 
-                # Display the result
+                # Generate keywords from the description
+                keywords = generate_keywords(description)
+                
+                # Display the results
                 st.success("Analysis complete!")
                 st.write("### Description:")
                 st.write(description)
+                st.write("### Keywords/Tags:")
+                st.write(keywords)
             except Exception as e:
                 st.error(f"An error occurred: {str(e)}") 
